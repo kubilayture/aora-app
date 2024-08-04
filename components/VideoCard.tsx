@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { icons } from '@/constants';
 import { IPost } from '@/constants/interfaces';
 import { ResizeMode, Video } from 'expo-av';
-const VideoCard = ({ title, creator, avatar, thumbnail, video }: IPost) => {
+const VideoCard = ({ title, creator, avatar, thumbnail, video, $id }: IPost) => {
   const [play, setPlay] = useState(false);
   return (
     <View className='flex-col items-center px-4 mb-14'>

@@ -19,11 +19,10 @@ const RootLayout = () => {
   });
 
   useEffect(() => {
-    if (error) throw error;
-    if (fontsLoaded) SplashScreen.hideAsync();
+    if (fontsLoaded || error) SplashScreen.hideAsync();
   }, [fontsLoaded, error]);
 
-  if (!fontsLoaded && error) return null;
+  if (!fontsLoaded && !error) return null;
 
   return (
     <GlobalProvider>
@@ -31,7 +30,7 @@ const RootLayout = () => {
         <Stack.Screen name='index' options={{ headerShown: false }} />
         <Stack.Screen name='(auth)' options={{ headerShown: false }} />
         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-        {/* <Stack.Screen name='/search/[query]' options={{ headerShown: false }} /> */}
+        <Stack.Screen name='search/[query]' options={{ headerShown: false }} />
       </Stack>
     </GlobalProvider>
   );

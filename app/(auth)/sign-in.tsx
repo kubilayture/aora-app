@@ -1,5 +1,5 @@
 import { Alert, Image, ScrollView, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import images from '@/constants/images';
 import FormField from '@/components/FormField';
@@ -9,7 +9,7 @@ import { signIn } from '@/lib/appwrite';
 import { useGlobalContext } from '@/context/GlobalProvider';
 
 const SignIn = () => {
-  const { setUser, setIsLoggedIn } = useGlobalContext();
+  const { setUser, setIsLoggedIn, user } = useGlobalContext();
 
   const [form, setForm] = useState({
     email: '',
@@ -17,6 +17,10 @@ const SignIn = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (user) router.replace('/home');
+  }, []);
 
   const submit = async () => {
     if (!form.email || !form.password) {

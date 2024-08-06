@@ -12,8 +12,6 @@ import InfoBox from '@/components/InfoBox';
 
 const Profile = () => {
   const { user, setUser, setIsLoggedIn, isLoading } = useGlobalContext();
-  console.log('user:::', user);
-
   if (isLoading) return <View>Loading...</View>;
 
   const { data: posts } = useAppwrite(() => getUserPosts(user?.$id));

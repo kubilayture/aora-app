@@ -8,8 +8,10 @@ import EmptyState from '@/components/EmptyState';
 import { getAllPosts, getLatestPosts } from '@/lib/appwrite';
 import useAppwrite from '@/lib/useAppwrite';
 import VideoCard from '@/components/VideoCard';
+import { useGlobalContext } from '@/context/GlobalProvider';
 
 const Home = () => {
+  const { user, setUser, setIsLoggedIn } = useGlobalContext();
   const { data: posts, refetch, isLoading } = useAppwrite(getAllPosts);
   const { data: latestPosts } = useAppwrite(getLatestPosts);
   const [refreshing, setRefreshing] = useState(false);
@@ -40,10 +42,10 @@ const Home = () => {
             <View className='justify-between items-start flex-row mb-6'>
               <View>
                 <Text className=' font-pmedium text-sm text-gray-100'>
-                  Welcome back
+                  Welcome back,
                 </Text>
                 <Text className='text-2xl font-semibold text-white'>
-                  KUBILAY
+                  {user?.username}
                 </Text>
               </View>
               <View className='mt-1.5'>
@@ -55,9 +57,7 @@ const Home = () => {
               </View>
             </View>
 
-            <SearchInput
-              placeholder='Search for a video topic'
-            />
+            <SearchInput initialQuery={''} />
             <View className='w-full flex-1 pt-5 pb-8'>
               <Text className='text-gray-100 text-lg font-pregular mb-3'>
                 Latest Videos

@@ -16,9 +16,11 @@ const GlobalProvider = ({ children }: { children: React.ReactNode; }) => {
         if (res) {
           setIsLoading(true);
           setUser(res);
+          setIsLoggedIn(true);
         } else {
           setIsLoading(false);
           setUser(null);
+          setIsLoggedIn(false);
         }
       })
       .catch((error: any) => {
